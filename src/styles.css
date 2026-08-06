@@ -1,0 +1,186 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Synergy Youth Consulting — design tokens
+ * Palette:
+ *  --cream    #FBF6EE  base
+ *  --orange   #E85D1F  brand primary
+ *  --charcoal #231F1A  ink / dark contrast
+ *  --gold     #F2A93B  accent
+ *  --warm     #FFFDF9  text on dark
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-cream: var(--cream);
+  --color-orange: var(--orange);
+  --color-charcoal: var(--charcoal);
+  --color-gold: var(--gold);
+  --color-warm: var(--warm);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --cream: #fbf6ee;
+  --orange: #e85d1f;
+  --charcoal: #231f1a;
+  --gold: #f2a93b;
+  --warm: #fffdf9;
+
+  --background: var(--cream);
+  --foreground: var(--charcoal);
+  --card: var(--warm);
+  --card-foreground: var(--charcoal);
+  --popover: var(--warm);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--orange);
+  --primary-foreground: var(--warm);
+  --secondary: #efe6d4;
+  --secondary-foreground: var(--charcoal);
+  --muted: #f2ecdd;
+  --muted-foreground: #5b544c;
+  --accent: var(--gold);
+  --accent-foreground: var(--charcoal);
+  --destructive: #b8371a;
+  --destructive-foreground: var(--warm);
+  --border: #e6ddc9;
+  --input: #e6ddc9;
+  --ring: var(--orange);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--orange);
+    color: var(--warm);
+  }
+  :focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility container-syc {
+  width: 87vw;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+@utility btn-orange {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.6rem;
+  background: var(--orange);
+  color: var(--warm);
+  font-weight: 600;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 10px 30px -12px rgba(232, 93, 31, 0.55);
+}
+@utility btn-orange-hover {
+  &:hover {
+    transform: translateY(-2px);
+    background: #cf4c14;
+    box-shadow: 0 18px 40px -14px rgba(232, 93, 31, 0.7);
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@utility animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes kenburns {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.12); }
+}
+@utility animate-kenburns {
+  animation: kenburns 18s ease-out forwards;
+}
+
+@keyframes scroll-line {
+  0%, 100% { opacity: 0.35; transform: scaleY(0.85); transform-origin: top; }
+  50% { opacity: 0.9; transform: scaleY(1); transform-origin: top; }
+}
+@utility animate-scroll-line {
+  animation: scroll-line 1.8s ease-in-out infinite;
+}
